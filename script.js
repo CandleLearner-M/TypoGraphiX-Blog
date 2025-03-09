@@ -12,14 +12,30 @@ function checkScroll() {
   }
 
   // Calculate new font size based on scroll position
-  let newSize = 3 - scrollPosition * 0.03; // Decrease by 0.03 rem for every 1px scrolled
+  let newSize = 2.4 - scrollPosition * 0.02; // Decrease by 0.03 rem for every 1px scrolled
 
   // Clamping the font size between 1.5rem and 3rem
-  newSize = Math.max(2, newSize);
-  newSize = Math.min(3, newSize);
+  newSize = Math.max(1.8, newSize);
+  newSize = Math.min(2.4, newSize);
 
   logo.style.fontSize = newSize + "rem";
 }
 
 // Event listener for scroll event
 window.addEventListener("scroll", checkScroll);
+
+// Modal window functionality
+const overlay = document.querySelector(".overlay");
+const gallery = document.querySelector(".grid");
+
+gallery.addEventListener("click", (e) => {
+  if (!(e.target.tagName.toLowerCase() === "img")) return;
+  if (!overlay.classList.contains("hidden")) return;
+  overlay.classList.remove("hidden");
+  overlay.innerHTML = "";
+
+  const cloneImg = e.target.cloneNode(true);
+  overlay.appendChild(cloneImg);
+});
+
+overlay.addEventListener("click", () => overlay.classList.add("hidden"));
