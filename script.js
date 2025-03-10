@@ -35,7 +35,15 @@ gallery.addEventListener("click", (e) => {
   overlay.innerHTML = "";
 
   const cloneImg = e.target.cloneNode(true);
+  setTimeout(() => {
+    cloneImg.classList.add("reveal");
+  }, 10);
   overlay.appendChild(cloneImg);
 });
 
-overlay.addEventListener("click", () => overlay.classList.add("hidden"));
+overlay.addEventListener("click", () => {
+  overlay.firstChild.classList.remove("reveal");
+  setTimeout(() => {
+    overlay.classList.add("hidden");
+  }, 300);
+});
